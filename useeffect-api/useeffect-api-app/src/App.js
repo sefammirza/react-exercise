@@ -1,31 +1,38 @@
 import React, {useState, useEffect} from "react";
-import "./App.css";
+import {useFetch} from "./useFetch";
 
-const useFetch = (url) => {
-  const [data, setData] = useState(null);
-  const [loading, setLoading] = useState(true);
+const App = () => {
 
-  useEffect(async() =>{
-    const response = await fetch(url);
-    const data = await response.json();
-    const [item] = data.results;
-    setData(item)
-    setLoading(false)
-  }, []);
-
-  return{data, loading}
-}
-
-export default () => {
   const [count, setCount] = useState(0);
-  const {data, loading} = useFetch("https://api.randomuser.me/")
+  const {data} = useFetch(
+    "https://raw.githubusercontent.com/ajzbc/kanye.rest/master/quotes.json"
+  );
+
+
+   function computeLongestWord () {
+     if (!data) {
+       return [];
+      }
+
+      let longestWord = "";
+
+      data.forEach(sentence =>
+        sentence.split(" ").forEach(word => {
+          if(word.length> longestWord.length){
+            longestWord = word;
+          }
+        })
+        )
+   }
+
 
 
   return(
     <div>
-      <p>You clicked {count} times</p>
-      <button onClick={()=> setCount(count + 1)}>Click Me</button>
-      {loading ? <div>...loading</div> : <div>{data.name.first}</div>}
+      <div>count: {count}</div>
+      <button onClick={() =>setCount(count+1)}>increment</button>
     </div>
   )
-}
+};
+
+export default App;
