@@ -1,17 +1,21 @@
-import logo from './logo.svg';
 import './App.css';
-import ComponentA from './components/ComponentA';
-import ComponentB from './components/ComponentB';
-import ComponentC from './components/ComponentC';
+import {useState} from 'react'
+import MyCounter from './components/MyCounter';
+import CounterContextProvider from './contexts/CounterContext';
+
 
 function App() {
+
+  const [name, setName] = useState('Truly Mittal')
+
   return (
+
+    <CounterContextProvider>
     <div className="App">
       <h1>Context API</h1>
-      <ComponentA/>
-      <ComponentB/>
-    
+      <MyCounter/>
     </div>
+    </CounterContextProvider>
   );
 }
 
