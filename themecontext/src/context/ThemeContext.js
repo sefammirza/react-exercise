@@ -1,5 +1,4 @@
-import React, {useContext} from 'react'
-import { Component } from 'react/cjs/react.production.min';
+import React, {Component, createContext} from 'react'
 
 
 export const ThemeContext = createContext();
@@ -13,7 +12,13 @@ class ThemeContextProvider extends Component {
 
     }
     render() {
-        return (  );
+        return (
+
+            <ThemeContextProvider value={{...this.state}}>
+                {this.props.children}
+            </ThemeContextProvider>
+
+          );
     }
 }
 
