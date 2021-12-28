@@ -1,15 +1,19 @@
 import React from 'react'
+import ThemeSwitcher from './ThemeSwitcher'
+import { MainContext, useContext } from '../context'
 
-const Footer = ({theme, setTheme}) => {
+const Footer = () => {
 
-    const switchTheme = () => {
-        setTheme(theme === "light" ? "dark" : "light")
+    const {setLogoText} =useContext(MainContext)
+    const switchLogoText = () => {
+        setLogoText("prototurk.net")
     }
 
     return (
         <div>
             footer component<br/>
-            <button onClick={switchTheme}>Swich theme</button>
+            <ThemeSwitcher/>
+            <button onClick={switchLogoText}>Switch Logo Text</button>
         </div>
     )
 }
