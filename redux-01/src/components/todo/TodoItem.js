@@ -16,7 +16,7 @@ const TodoItem = ({ completed, text, id }) => {
 
   return (
     <div style={styled} className="todo-list">
-      <h2 className="todoText">text</h2>
+      <h2 className="todoText">{text}</h2>
       <div>
         <span>
           <img
