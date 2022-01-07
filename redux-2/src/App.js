@@ -3,6 +3,8 @@ import AppRouter from './router';
 import { createStore, applyMiddleware, compose } from 'redux';
 import thunk from 'redux-thunk';
 import {Provider as StoreProvider} from 'react-redux'
+import axios from 'axios';
+
 
 const initialState = {
     loading: false,
@@ -82,6 +84,18 @@ if (process.env.NODE_ENV === 'development'){
 }else {
     /* store = createStore(rootReducer); */
     store = createStore(rootReducer, applyMiddleware(thunk));
+}
+
+export const getUserList = async (dispatch, getstate) => {
+    try {
+        dispatch({type: 'SET_LOADING_TRUE'});
+        const response = await axios.get('https://jsonplaceholder.typicode.com/users')
+        dispatch({type:'SET_USER_LIST', payload:response.data})
+    } catch (error) {
+        console.log(error)
+    } finally{
+        dispatch({type:'SET_LOADING_FALSE'})
+    }
 }
 
 /* store.subscribe(() => {
